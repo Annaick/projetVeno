@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EnseignantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/enseignant/ajouter', [EnseignantController::class, 'ajouterEnseignant']);
+Route::get('/enseignants/salaire', [EnseignantController::class, 'afficherSalaire']);
+Route::put('/enseignant/{id}', [EnseignantController::class, 'modifierEnseignant']);
+Route::delete('/enseignant/{id}', [EnseignantController::class, 'supprimerEnseignant']);
+Route::get('/enseignants/statistiques-salaires', [EnseignantController::class, 'afficherStatistiquesSalaires']);
+
+
