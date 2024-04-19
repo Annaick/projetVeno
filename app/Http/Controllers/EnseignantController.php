@@ -44,7 +44,7 @@ public function afficherSalaire(Request $request)
         $query = Enseignant::query();
 
         if ($name) {    
-            $query->where("nom LIKE '%$name%'");
+            $query->where('nom', 'like', '%' . $name . '%');
         }
         $enseignants = $query->get();
 

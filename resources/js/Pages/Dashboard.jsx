@@ -44,7 +44,7 @@ export default function Dashboard({ auth }) {
             <main className='w-full h-[100vh] flex items-center p-4'>
                 <div className='h-[85vh] bg-white w-[60%] rounded-xl p-8 shadow-2xl'>
                     <div className='flex gap-10 mb-4'>
-                        <Input className='rounded-lg' placeholder='Rechercher....' />
+                        <Input value={nameSearch} onChange={(e) => setNameSearch(e.target.value)} className='rounded-lg' placeholder='Rechercher....' />
                         <Button onClick={()=>{setShowCreate(true)}} icon={<UserAddOutlined/>} type='primary' size='large'>Ajouter</Button>
                     </div>
                     <TableProff data={proffeseurs?.enseignants ?? []} />
