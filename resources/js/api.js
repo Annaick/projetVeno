@@ -17,7 +17,7 @@ export async function modifierProffeseur (id, data){
 }
 
 export async function deleteProffesseur (id){
-    const professeurs = await axios.delete(`/api/enseignants/${id}`);
+    const professeurs = await axios.delete(`/api/enseignant/${id}`);
     return professeurs.data;
 }
 

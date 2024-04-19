@@ -16,7 +16,7 @@ export function useProffeseurs(name = '') {
         },
     });
 
-    const { mutateAsync: deleteProffeseur } = useMutation(api.deleteProffeseur, {
+    const { mutateAsync: deleteProffeseur } = useMutation(api.deleteProffesseur, {
         onSuccess: () => {
             queryClient.invalidateQueries('proffeseurs');
         },

@@ -6,16 +6,24 @@ import { useEffect, useState } from 'react';
 import TableProff from '@/Components/Table';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import Create from '@/Components/create';
+import Delete from '@/Components/delete';
 
 export default function Dashboard({ auth }) {
     const [nameSearch, setNameSearch] = useState('');
     const [showCreate, setShowCreate] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
+    const [showUpdate, setShowUpdate] = useState(false);
+
     const [selectedProf, setSelectedProf] = useState({
         numens: '',
         nom: '',
         nbheures: 0,
         tauxhoraire: 0,
     });
+
+    useEffect(()=>{
+        console.log(selectedProf)
+    }, [selectedProf])
 
 
     const { //Les hooks pour intéragir avec la base de données
@@ -35,6 +43,15 @@ export default function Dashboard({ auth }) {
             messageAPI.error('Une erreur est survenue: ' + error.message);
         }
     }
+    const handleDeleteProf = async () => {
+        try{
+            await deleteProffeseur(selectedProf.id);
+            messageAPI.success('Enseignant supprimé avec succes');
+            setShowDelete(false);
+        }catch(error){
+            messageAPI.error('Une erreur est survenue: ' + error.message);
+        }
+    }   
 
     const [messageAPI, contextHolder] = message.useMessage();
 
@@ -47,8 +64,9 @@ export default function Dashboard({ auth }) {
                         <Input value={nameSearch} onChange={(e) => setNameSearch(e.target.value)} className='rounded-lg' placeholder='Rechercher....' />
                         <Button onClick={()=>{setShowCreate(true)}} icon={<UserAddOutlined/>} type='primary' size='large'>Ajouter</Button>
                     </div>
-                    <TableProff data={proffeseurs?.enseignants ?? []} />
-                    <Create prof={selectedProf} isOpen={showCreate} onOk={handleCreateProf} onCancel={() => setShowCreate(false)} />
+                    <TableProff setOpenDelete={setShowDelete} setOpenUpdate={setShowUpdate} setProf={setSelectedProf} data={proffeseurs?.enseignants ?? []} />
+                    <Delete isOpen={showDelete} onCancel={()=>{setShowDelete(false)}} onOk={handleDeleteProf} ></Delete>
+                    <Create setProf={selectedProf} isOpen={showCreate} onOk={handleCreateProf} onCancel={() => setShowCreate(false)} />
                 </div>
             </main>
         </Authenticated>
