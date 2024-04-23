@@ -6,19 +6,22 @@ export function useProffeseurs(name = '') {
 
     const { mutateAsync: createProffeseur } = useMutation(api.createProffeseur, {
         onSuccess: () => {
-            queryClient.invalidateQueries('proffeseurs', 'stats');
+            queryClient.invalidateQueries('proffeseurs');
+            queryClient.invalidateQueries('stats');
         },
     });
 
     const { mutateAsync: modifierProffeseur } = useMutation(api.modifierProffeseur, {
         onSuccess: () => {
-            queryClient.invalidateQueries('proffeseurs', 'stats');
+            queryClient.invalidateQueries('proffeseurs');
+            queryClient.invalidateQueries('stats');
         },
     });
 
     const { mutateAsync: deleteProffeseur } = useMutation(api.deleteProffesseur, {
         onSuccess: () => {
-            queryClient.invalidateQueries('proffeseurs', 'stats');
+            queryClient.invalidateQueries('proffeseurs');
+            queryClient.invalidateQueries('stats');
         },
     });
 

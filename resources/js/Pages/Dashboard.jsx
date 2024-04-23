@@ -101,6 +101,28 @@ export default function Dashboard({ auth }) {
                     </div>
                     <div className='bg-white flex items-center justify-center h-[80%] shadow-2xl     p-4 rounded-xl'>
                         <Pie
+                            options={{
+                                legend: {
+                                    display: true,
+                                    position: "right",
+                                    labels: {
+                                      generateLabels: function(chart) {
+                                        // Générer les labels par défaut
+                                        const labels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                        // Ajouter le minimum et le maximum
+                                        labels.push({
+                                          text: `Min: ${stats?.salaire_minimal ?? 0}`,
+                                          // Ajoutez des styles si nécessaire
+                                        });
+                                        labels.push({
+                                          text: `Max: ${stats?.salaire_maximal ?? 0}`,
+                                          // Ajoutez des styles si nécessaire
+                                        });
+                                        return labels;
+                                      }
+                                    }
+                                  },
+                            }}
                             className='chart'
                             data={{
                                 labels: proffeseurs?.enseignants.map (prof => prof.nom) ?? [],
