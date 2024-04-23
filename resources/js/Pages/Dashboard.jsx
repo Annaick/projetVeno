@@ -51,7 +51,8 @@ export default function Dashboard({ auth }) {
 
     const handleUpdate = async (e) => {
         try{
-            await modifierProffeseur(selectedProf.id, {
+            await modifierProffeseur({
+                id: selectedProf.id,
                 numens: e.numens,
                 nom: e.nom,
                 tauxhoraire: Number(e.tauxhoraire),

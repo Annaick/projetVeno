@@ -11,9 +11,10 @@ export async function createProffeseur (data){
     return professeurs.data;
 }
 
-export async function modifierProffeseur (id, data){
+export async function modifierProffeseur (data){
     try{
-        const professeurs = await axios.put(`/api/enseignant/${id}`, data);
+        console.log(data);
+        const professeurs = await axios.put(`/api/enseignant/${data.id}`, data);
         return professeurs.data;
     } catch (e){
         console.error (e)
