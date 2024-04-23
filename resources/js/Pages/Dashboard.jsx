@@ -24,7 +24,7 @@ export default function Dashboard({ auth }) {
 
     const { //Les hooks pour intéragir avec la base de données
         proffeseurs,
-        isLoading,
+        stats,
         createProffeseur,
         modifierProffeseur,
         deleteProffeseur,
@@ -70,7 +70,7 @@ export default function Dashboard({ auth }) {
     return (
         <Authenticated>
             {contextHolder}
-            <main className='w-full h-[100vh] flex items-center p-4'>
+            <main className='w-full h-[100vh] flex gap-4 items-center p-4'>
                 <div className='h-[85vh] bg-white w-[60%] rounded-xl p-8 shadow-2xl'>
                     <div className='flex gap-10 mb-4'>
                         <Input value={nameSearch} onChange={(e) => setNameSearch(e.target.value)} className='rounded-lg' placeholder='Rechercher....' />
@@ -80,6 +80,18 @@ export default function Dashboard({ auth }) {
                     <Delete isOpen={showDelete} onCancel={()=>{setShowDelete(false)}} onOk={handleDeleteProf} ></Delete>
                     <Create setProf={selectedProf} isOpen={showCreate} onOk={handleCreateProf} onCancel={() => setShowCreate(false)} />
                     <Update isOpen={showUpdate} onCancel={()=>{setShowUpdate(false)}} onOk={handleUpdate} prof={selectedProf}></Update>
+                </div>
+                <div className='flex flex-col gap-4 h-[85vh] w-[40%] rounded-xl'>
+                    <div className='bg-white p-4 rounded-xl'>
+                        <h3 className='font-bold text-lg text-gray-500'>
+                            STATISTIQUE
+                        </h3>
+                        <div className='flex w-full justify-around'>
+                            <span>Salaire min: {stats.salaire_minimal ?? 'aucun'}</span>
+                            <span>Salaire min: {stats.salaire_minimal ?? 'aucun'}</span>
+                        </div>
+                    </div>
+                    <div className='bg-white h-full p-4 rounded-xl'>test 2</div>
                 </div>
             </main>
         </Authenticated>

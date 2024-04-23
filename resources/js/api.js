@@ -6,6 +6,11 @@ export async function getProffeseur (name = ''){
     return professeurs.data;
 }
 
+export async function getStat (){
+    const professeurs = await axios.get(`/api/enseignants/statistiques-salaires`);
+    return professeurs.data;
+}
+
 export async function createProffeseur (data){
     const professeurs = await axios.post('/api/enseignant/ajouter', data);
     return professeurs.data;
