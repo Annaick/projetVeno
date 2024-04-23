@@ -96,7 +96,7 @@ export default function Dashboard({ auth }) {
                         <div className='flex w-full justify-between'>
                             <span className='text-gray-500'>Salaire min: <span className='text-blue-500'>{stats?.salaire_minimal ?? 'aucun'}</span></span>
                             <span className='text-gray-500'>Salaire max: <span className='text-red-500'>{stats?.salaire_maximal ?? 'aucun'}</span></span>
-                            <span className='text-gray-500'>Montant total: <span className='text-yellow-500'>{stats?.montant_total_salaires ?? 'aucun'}</span></span>
+                            <span className='text-gray-500'>Salaire total: <span className='text-yellow-500'>{stats?.montant_total_salaires ?? 'aucun'}</span></span>
                         </div>
                     </div>
                     <div className='bg-white flex items-center justify-center h-[80%] shadow-2xl     p-4 rounded-xl'>
