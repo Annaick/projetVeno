@@ -8,8 +8,8 @@ import Authenticated from '@/Layouts/AuthenticatedLayout';
 import Create from '@/Components/create';
 import Delete from '@/Components/delete';
 import Update from '@/Components/update';
-import { Chart, ArcElement } from 'chart.js';
-Chart.register(ArcElement);
+import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
+Chart.register(ArcElement, Tooltip, Legend);
 import { Pie } from 'react-chartjs-2';
 export default function Dashboard({ auth }) {
     const [nameSearch, setNameSearch] = useState('');
@@ -106,16 +106,22 @@ export default function Dashboard({ auth }) {
                                 labels: proffeseurs?.enseignants.map (prof => prof.nom) ?? [],
                                 datasets:[
                                     {
-                                        data: proffeseurs?.enseignants.map(enseignant => enseignant.salaire)?? [],
+                                        data: proffeseurs?.enseignants.map(enseignant => Number(enseignant.salaire))?? [],
                                         backgroundColor: [
                                             'rgba(255, 99, 132, 0.2)',
                                             'rgba(54, 162, 235, 0.2)',
-                                            // Ajoutez d'autres couleurs ici
+                                            'rgba(255, 206, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                            'rgba(153, 102, 255, 0.2)',
+                                            'rgba(255, 159, 64, 0.2)',
                                            ],
                                         borderColor: [
                                             'rgba(255, 99, 132, 1)',
                                             'rgba(54, 162, 235, 1)',
-                                            // Ajoutez d'autres couleurs ici
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                            'rgba(153, 102, 255, 1)',
+                                            'rgba(255, 159, 64, 1)',
                                            ],
                                         borderWidth: 1,
 
