@@ -79,12 +79,7 @@ public function modifierEnseignant(Request $request, $id)
             throw new \UnexpectedValueException('Enseignant is null');
         }
         // Unhandled exception: If request attributes are not valid, an exception will be thrown
-        $enseignant->update($request->validate([
-            'numens' => 'required|string',
-            'nom' => 'required|string',
-            'nbheures' => 'required|integer|min:1',
-            'tauxhoraire' => 'required|numeric|min:0.01',
-        ]));
+        $enseignant->update($request->all());
         return response()->json([
             'status' => 'success',
             'message' => 'Enseignant mis à jour avec succès.'

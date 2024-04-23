@@ -34,12 +34,12 @@ const columns = [
     key: 'action',
     render: (_, record) => (
       <Space size="middle">
-        <Button type="text" icon={<EditOutlined onClick={() => {setProf(record); setOpenUpdate(true)}} />}></Button>
-        <Button type="default" danger icon={<DeleteOutlined onClick={() => {setProf(record); setOpenDelete(true)}}/>}></Button>
+        <Button type="text" onClick={() => {setProf(record); setOpenUpdate(true)}} icon={<EditOutlined/>}></Button>
+        <Button type="default" onClick={() => {setProf(record); setOpenDelete(true)}} danger icon={<DeleteOutlined/>}></Button>
       </Space>
     ),
   },
 ];
-  return (<Table pagination={{ pageSize: 4 }} columns={columns} dataSource={data} />)
+  return (<Table pagination={{ pageSize: 7 }} columns={columns} dataSource={data} />)
 }
 export default TableProf

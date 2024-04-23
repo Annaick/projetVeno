@@ -7,7 +7,7 @@ import TableProff from '@/Components/Table';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
 import Create from '@/Components/create';
 import Delete from '@/Components/delete';
-
+import Update from '@/Components/update';
 export default function Dashboard({ auth }) {
     const [nameSearch, setNameSearch] = useState('');
     const [showCreate, setShowCreate] = useState(false);
@@ -15,16 +15,12 @@ export default function Dashboard({ auth }) {
     const [showUpdate, setShowUpdate] = useState(false);
 
     const [selectedProf, setSelectedProf] = useState({
+        id: 0,
         numens: '',
         nom: '',
         nbheures: 0,
         tauxhoraire: 0,
     });
-
-    useEffect(()=>{
-        console.log(selectedProf)
-    }, [selectedProf])
-
 
     const { //Les hooks pour intéragir avec la base de données
         proffeseurs,
@@ -53,6 +49,21 @@ export default function Dashboard({ auth }) {
         }
     }   
 
+    const handleUpdate = async (e) => {
+        try{
+            await modifierProffeseur(selectedProf.id, {
+                numens: e.numens,
+                nom: e.nom,
+                tauxhoraire: Number(e.tauxhoraire),
+                nbheures: Number (e.nbheures)
+            });
+            messageAPI.success('Enseignant mis à jour avec succes');
+            setShowUpdate(false);
+        }catch(error){
+            messageAPI.error('Une erreur est survenue: ' + error.message);
+        }
+    }
+
     const [messageAPI, contextHolder] = message.useMessage();
 
     return (
@@ -67,6 +78,7 @@ export default function Dashboard({ auth }) {
                     <TableProff setOpenDelete={setShowDelete} setOpenUpdate={setShowUpdate} setProf={setSelectedProf} data={proffeseurs?.enseignants ?? []} />
                     <Delete isOpen={showDelete} onCancel={()=>{setShowDelete(false)}} onOk={handleDeleteProf} ></Delete>
                     <Create setProf={selectedProf} isOpen={showCreate} onOk={handleCreateProf} onCancel={() => setShowCreate(false)} />
+                    <Update isOpen={showUpdate} onCancel={()=>{setShowUpdate(false)}} onOk={handleUpdate} prof={selectedProf}></Update>
                 </div>
             </main>
         </Authenticated>
