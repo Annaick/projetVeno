@@ -87,8 +87,9 @@ export default function Dashboard({ auth }) {
                             STATISTIQUE
                         </h3>
                         <div className='flex w-full justify-around'>
-                            <span>Salaire min: {stats.salaire_minimal ?? 'aucun'}</span>
-                            <span>Salaire min: {stats.salaire_minimal ?? 'aucun'}</span>
+                        <span>Salaire min: {stats && stats.salaire_minimal ? stats.salaire_minimal : 'aucun'}</span>
+                        <span>Salaire min: {stats && stats.salaire_minimal ? stats.salaire_minimal : 'aucun'}</span>
+
                         </div>
                     </div>
                     <div className='bg-white h-full p-4 rounded-xl'>test 2</div>
