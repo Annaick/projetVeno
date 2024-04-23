@@ -8,6 +8,9 @@ import Authenticated from '@/Layouts/AuthenticatedLayout';
 import Create from '@/Components/create';
 import Delete from '@/Components/delete';
 import Update from '@/Components/update';
+import { Chart, ArcElement } from 'chart.js';
+Chart.register(ArcElement);
+import { Pie } from 'react-chartjs-2';
 export default function Dashboard({ auth }) {
     const [nameSearch, setNameSearch] = useState('');
     const [showCreate, setShowCreate] = useState(false);
@@ -67,6 +70,10 @@ export default function Dashboard({ auth }) {
 
     const [messageAPI, contextHolder] = message.useMessage();
 
+    useEffect(()=>{
+        console.log (proffeseurs)
+    }, [proffeseurs])
+
     return (
         <Authenticated>
             {contextHolder}
@@ -82,17 +89,44 @@ export default function Dashboard({ auth }) {
                     <Update isOpen={showUpdate} onCancel={()=>{setShowUpdate(false)}} onOk={handleUpdate} prof={selectedProf}></Update>
                 </div>
                 <div className='flex flex-col gap-4 h-[85vh] w-[40%] rounded-xl'>
-                    <div className='bg-white p-4 rounded-xl'>
-                        <h3 className='font-bold text-lg text-gray-500'>
+                    <div className='bg-white h-[28%] p-4 rounded-xl'>
+                        <h3 className='font-bold text-lg text-gray-500 mb-4'>
                             STATISTIQUE
                         </h3>
-                        <div className='flex w-full justify-around'>
-                        <span>Salaire min: {stats && stats.salaire_minimal ? stats.salaire_minimal : 'aucun'}</span>
-                        <span>Salaire min: {stats && stats.salaire_minimal ? stats.salaire_minimal : 'aucun'}</span>
-
+                        <div className='flex w-full justify-between'>
+                            <span className='text-gray-500'>Salaire min: <span className='text-blue-500'>{stats?.salaire_minimal ?? 'aucun'}</span></span>
+                            <span className='text-gray-500'>Salaire max: <span className='text-red-500'>{stats?.salaire_maximal ?? 'aucun'}</span></span>
+                            <span className='text-gray-500'>Montant total: <span className='text-yellow-500'>{stats?.montant_total_salaires ?? 'aucun'}</span></span>
                         </div>
                     </div>
-                    <div className='bg-white h-full p-4 rounded-xl'>test 2</div>
+                    <div className='bg-white flex items-center justify-center h-[80%] p-4 rounded-xl'>
+                        <Pie
+                            className='chart'
+                            data={{
+                                labels: proffeseurs?.enseignants.map (prof => prof.nom) ?? [],
+                                datasets:[
+                                    {
+                                        data: proffeseurs?.enseignants.map(enseignant => enseignant.salaire)?? [],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            // Ajoutez d'autres couleurs ici
+                                           ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            // Ajoutez d'autres couleurs ici
+                                           ],
+                                        borderWidth: 1,
+
+                                    }
+                                ]
+                            }}
+
+                        >
+
+                        </Pie>
+                    </div>
                 </div>
             </main>
         </Authenticated>
