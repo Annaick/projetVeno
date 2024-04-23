@@ -9,7 +9,7 @@ import Create from '@/Components/create';
 import Delete from '@/Components/delete';
 import Update from '@/Components/update';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
-Chart.register(ArcElement, Tooltip, Legend);
+Chart.register(ArcElement, Tooltip);
 import { Pie } from 'react-chartjs-2';
 export default function Dashboard({ auth }) {
     const [nameSearch, setNameSearch] = useState('');
