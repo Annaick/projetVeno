@@ -89,7 +89,7 @@ export default function Dashboard({ auth }) {
                     <Update isOpen={showUpdate} onCancel={()=>{setShowUpdate(false)}} onOk={handleUpdate} prof={selectedProf}></Update>
                 </div>
                 <div className='flex flex-col gap-4 h-[85vh] w-[40%] rounded-xl'>
-                    <div className='bg-white h-[28%] p-4 rounded-xl'>
+                    <div className='bg-white h-[28%] p-4 rounded-xl shadow-2xl'>
                         <h3 className='font-bold text-lg text-gray-500 mb-4'>
                             STATISTIQUE
                         </h3>
@@ -99,7 +99,7 @@ export default function Dashboard({ auth }) {
                             <span className='text-gray-500'>Montant total: <span className='text-yellow-500'>{stats?.montant_total_salaires ?? 'aucun'}</span></span>
                         </div>
                     </div>
-                    <div className='bg-white flex items-center justify-center h-[80%] p-4 rounded-xl'>
+                    <div className='bg-white flex items-center justify-center h-[80%] shadow-2xl     p-4 rounded-xl'>
                         <Pie
                             className='chart'
                             data={{
