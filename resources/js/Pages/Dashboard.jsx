@@ -9,7 +9,7 @@ import Create from '@/Components/create';
 import Delete from '@/Components/delete';
 import Update from '@/Components/update';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
-Chart.register(ArcElement, Tooltip);
+Chart.register(ArcElement, Tooltip, Legend);
 import { Pie } from 'react-chartjs-2';
 export default function Dashboard({ auth }) {
     const [nameSearch, setNameSearch] = useState('');
@@ -50,7 +50,17 @@ export default function Dashboard({ auth }) {
         }catch(error){
             messageAPI.error('Une erreur est survenue: ' + error.message);
         }
-    }   
+    } 
+    function arrangeArray(arr) {
+        arr.sort(function(a, b) {
+            return b - a;
+        });
+        if (arr.length > 1) {
+            let smallest = arr.pop();
+            arr.splice(1, 0, smallest);
+        }
+        return arr;
+    }
 
     const handleUpdate = async (e) => {
         try{
@@ -125,10 +135,10 @@ export default function Dashboard({ auth }) {
                             }}
                             className='chart'
                             data={{
-                                labels: proffeseurs?.enseignants.map (prof => prof.nom) ?? [],
+                                labels: ['Max', 'Min'],
                                 datasets:[
                                     {
-                                        data: proffeseurs?.enseignants.map(enseignant => Number(enseignant.salaire))?? [],
+                                        data: arrangeArray(proffeseurs?.enseignants.map(enseignant => Number(enseignant.salaire)) ?? []),
                                         backgroundColor: [
                                             'rgba(255, 99, 132, 0.2)',
                                             'rgba(54, 162, 235, 0.2)',
@@ -155,8 +165,8 @@ export default function Dashboard({ auth }) {
 
                         </Pie>
                         <div className='flex justify-around gap-4 w-full'>
-                            <span className='text-gray-500'>min: {stats?.salaire_minimal ?? 'aucun'}</span>
-                            <span className='text-gray-500'>max: {stats?.salaire_maximal ?? 'aucun'}</span>
+                            <span className='text-gray-400'>min: {stats?.salaire_minimal ?? 'aucun'}</span>
+                            <span className='text-gray-400'>max: {stats?.salaire_maximal ?? 'aucun'}</span>
                         </div>
                     </div>
                 </div>
