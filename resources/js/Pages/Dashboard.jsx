@@ -112,9 +112,14 @@ export default function Dashboard({ auth }) {
                     <div className='bg-white flex flex-col gap-4 items-center justify-center h-[80%] shadow-2xl     p-4 rounded-xl'>
                         <Pie
                             options={{
+                                plugins:{
+                                    legend:{
+                                        position: 'bottom'
+                                    }
+                                },
                                 legend: {
                                     display: true,
-                                    position: "right",
+                                    position: "bottom",
                                     labels: {
                                       generateLabels: function(chart) {
                                         // Générer les labels par défaut
