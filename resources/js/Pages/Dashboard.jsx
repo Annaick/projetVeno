@@ -99,7 +99,7 @@ export default function Dashboard({ auth }) {
                             <span className='text-gray-500'>Salaire total: <span className='text-yellow-500'>{stats?.montant_total_salaires ?? 'aucun'}</span></span>
                         </div>
                     </div>
-                    <div className='bg-white flex items-center justify-center h-[80%] shadow-2xl     p-4 rounded-xl'>
+                    <div className='bg-white flex flex-col gap-4 items-center justify-center h-[80%] shadow-2xl     p-4 rounded-xl'>
                         <Pie
                             options={{
                                 legend: {
@@ -108,7 +108,7 @@ export default function Dashboard({ auth }) {
                                     labels: {
                                       generateLabels: function(chart) {
                                         // Générer les labels par défaut
-                                        const labels = Chart.defaults.plugins.legend.labels.generateLabels(chart);
+                                        const labels = [];
                                         // Ajouter le minimum et le maximum
                                         labels.push({
                                           text: `Min: ${stats?.salaire_minimal ?? 0}`,
@@ -154,6 +154,10 @@ export default function Dashboard({ auth }) {
                         >
 
                         </Pie>
+                        <div className='flex justify-around gap-4 w-full'>
+                            <span className='text-gray-500'>min: {stats?.salaire_minimal ?? 'aucun'}</span>
+                            <span className='text-gray-500'>max: {stats?.salaire_maximal ?? 'aucun'}</span>
+                        </div>
                     </div>
                 </div>
             </main>
