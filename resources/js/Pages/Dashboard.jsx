@@ -135,7 +135,7 @@ export default function Dashboard({ auth }) {
                             }}
                             className='chart'
                             data={{
-                                labels: ['Max', 'Min'],
+                                labels: [`Max: ${stats?.salaire_maximal ?? 'aucun'}`, `Min: ${stats?.salaire_minimal ?? 'aucun'}`],
                                 datasets:[
                                     {
                                         data: arrangeArray(proffeseurs?.enseignants.map(enseignant => Number(enseignant.salaire)) ?? []),
@@ -164,10 +164,6 @@ export default function Dashboard({ auth }) {
                         >
 
                         </Pie>
-                        <div className='flex justify-around gap-4 w-full'>
-                            <span className='text-gray-400'>min: {stats?.salaire_minimal ?? 'aucun'}</span>
-                            <span className='text-gray-400'>max: {stats?.salaire_maximal ?? 'aucun'}</span>
-                        </div>
                     </div>
                 </div>
             </main>
