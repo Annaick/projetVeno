@@ -10,7 +10,7 @@ class EnseignantController extends Controller
 {
 
     //ajout
-    public function ajouterEnseignant(Request $request)
+   /* public function ajouterEnseignant(Request $request)
     {
         try{
             $enseignant = new Enseignant([
@@ -33,7 +33,44 @@ class EnseignantController extends Controller
                 'message' => 'Erreur lors de l\'ajout: ' . $e
             ], 500);
         }
+    } */
+
+    public function ajouterEnseignant(Request $request)
+{
+    try {
+        // Vérifier si l'enseignant existe déjà
+        $existingEnseignant = Enseignant::where('numens', $request->input('numens'))->first();
+        
+        if ($existingEnseignant) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Cet enseignant existe déjà.'
+            ], 400); // Code de réponse 400 pour indiquer une mauvaise requête
+        }
+
+        // Si l'enseignant n'existe pas, alors l'ajouter
+        $enseignant = new Enseignant([
+            'numens' => $request->input('numens'),
+            'nom' => $request->input('nom'),
+            'nbheures' => $request->input('nbheures'),
+            'tauxhoraire' => $request->input('tauxhoraire'),
+        ]);
+
+        $enseignant->save();
+        
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Enseignant ajouté avec succès.',
+            'enseignant' => $enseignant
+        ], 200);
+    } catch (Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Erreur lors de l\'ajout: ' . $e->getMessage()
+        ], 500);
     }
+}
+
 
 
 //afficher 
