@@ -25,7 +25,7 @@ export default function Dashboard({ auth }) {
         tauxhoraire: 0,
     });
 
-    const { //Les hooks pour
+    const { 
         proffeseurs,
         stats,
         createProffeseur,
