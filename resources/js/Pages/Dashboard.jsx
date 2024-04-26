@@ -25,7 +25,7 @@ export default function Dashboard({ auth }) {
         tauxhoraire: 0,
     });
 
-    const { //Les hooks pour intéragir avec la base de données
+    const { //Les hooks pour
         proffeseurs,
         stats,
         createProffeseur,
@@ -115,7 +115,9 @@ export default function Dashboard({ auth }) {
                                 plugins:{
                                     legend:{
                                         position: 'bottom'
+                                        
                                     }
+                                    
                                 },
                                 legend: {
                                     display: true,
